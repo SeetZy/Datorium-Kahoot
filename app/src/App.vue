@@ -1,5 +1,20 @@
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+import { ref, computed } from 'vue'
+import Home from './views/Home.vue'
 
-<template>
-  <div class="w-full h-screen bg-red-400"></div>
-</template>
+const routes = {
+  '/': Home,
+}
+
+const currentPath = ref(window.location.hash)
+
+window.addEventListener('hashchange', () => {
+  currentPath.value = window.location.hash
+})
+
+const currentView = computed(() => {
+  return routes[currentPath.value.slice(1) || '/']
+})
+</script>
+
+<template></template>
