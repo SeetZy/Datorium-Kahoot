@@ -1,3 +1,10 @@
+<script setup lang="ts">
+
+  const props = defineProps({
+    answer: String
+  })
+</script>
+
 <template>
   <div class="form-check">
     <input
@@ -7,11 +14,7 @@
       id="flexRadioDefault1"
     />
     <label class="form-check-label" for="flexRadioDefault1">
-      <!-- {{ answer }} -->
+      {{ props.answer }}
     </label>
   </div>
 </template>
-
-<script setup lang="ts">
-import { axios } from "axios";
-</script>

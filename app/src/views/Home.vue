@@ -11,6 +11,9 @@ import gsap from 'gsap'
  */
 import Form from '../components/Form.vue'
 
+
+// const myAnswer = 'My answer'
+
 onMounted(() => {
   document.title = 'QUIZ // DATORIUM QUIZ'
 
@@ -22,11 +25,6 @@ onMounted(() => {
   )
 })
 
-// export default {
-//   components: {
-//     ChildComp,
-//   },
-// }
 </script>
 
 <template>
@@ -39,8 +37,8 @@ onMounted(() => {
     >
       <h3>Kas ir primārā atslēga?</h3>
 
-      <Form />
-      <Form />
+      <Form :answer="`Mana atbilde`" />
+      <Form :answer="`Mana atbilde2`" />
       <Form />
       <Form />
     </div>
