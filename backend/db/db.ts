@@ -3,7 +3,7 @@
 /**
  * * Library imports
  */
-const sqlite3 = require('sqlite3').verbose()
+import sqlite3 from 'sqlite3'
 
 // Defining the DB
 export const database = new sqlite3.Database('./db/database.db')
