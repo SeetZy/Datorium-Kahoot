@@ -13,9 +13,5 @@
 </template>
 
 <script setup lang="ts">
-// export default {
-//   props: {
-//     answer: String,
-//   },
-// }
+import { axios } from "axios";
 </script>
