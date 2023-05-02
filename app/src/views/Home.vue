@@ -9,10 +9,9 @@ import gsap from 'gsap'
 /**
  * * Component imports
  */
-import Form from '../components/Form.vue'
+import Databases from '../components/questions/databases.vue'
+import ProblemAnalysis from '../components/questions/problemAnalysis.vue'
 
-
-// const myAnswer = 'My answer'
 
 onMounted(() => {
   document.title = 'QUIZ // DATORIUM QUIZ'
@@ -30,17 +29,7 @@ onMounted(() => {
 <template>
   <div class="w-full h-screen bg-red-400 flex items-center flex-col" id="form">
     <h1>Datorium Quiz</h1>
-    <div class="flex items-center justify-center"></div>
-    <h2>Datubāzes</h2>
-    <div
-      class="flex items-start justify-center flex-col w-2/4 h-1/4 border-2 rounded bg-white"
-    >
-      <h3>Kas ir primārā atslēga?</h3>
-
-      <Form :answer="`Mana atbilde`" />
-      <Form :answer="`Mana atbilde2`" />
-      <Form />
-      <Form />
-    </div>
+    <Databases />
+    <ProblemAnalysis />
   </div>
 </template>

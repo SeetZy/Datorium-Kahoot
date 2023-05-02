@@ -1,7 +1,9 @@
 <script setup lang="ts">
 
   const props = defineProps({
-    answer: String
+    answer: String,
+    inputId: String,
+    inputFor: String
   })
 </script>
 
@@ -11,7 +13,7 @@
       class="form-check-input"
       type="radio"
       name="flexRadioDefault"
-      id="flexRadioDefault1"
+      id="inputId"
     />
     <label class="form-check-label" for="flexRadioDefault1">
       {{ props.answer }}
