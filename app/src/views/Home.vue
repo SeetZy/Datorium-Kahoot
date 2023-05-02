@@ -27,10 +27,8 @@ onMounted(() => {
     class="w-full h-screen bg-bg-png bg-cover bg-no-repeat flex items-center justify-center"
     id="form"
   >
-    <div
-      class="flex items-center justify-center bg-white rounded-md p-3 w-[70vw]"
-    >
-      <h1 class="text-center">Datorium Quiz</h1>
+    <div class="flex justify-center bg-white rounded-md p-3 w-[70vw]">
+      <h1>Datorium Quiz</h1>
     </div>
   </div>
 </template>
