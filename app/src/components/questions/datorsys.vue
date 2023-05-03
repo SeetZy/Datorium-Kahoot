@@ -12,11 +12,23 @@
         <button type="submit" class="btn btn-primary mt-2" @click.prevent="submitQuiz()">Iesniegt</button>
       </form>
       <p v-if="quizCompleted">You scored {{ userScore }} out of {{ maxScore }}.</p>
+      <button type="button" class="btn btn-info" @click="fetchAllData()">Fetch data</button>
     </div>
   </template>
   
   <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref } from 'vue';
+  import axios from 'axios';
+
+  interface QuizData {
+  // Define the shape of your quiz data object
+  // For example:
+  title: string;
+  questions: string;
+  answers: string;
+}
+
+const data = ref<QuizData[]>([]); // Define the type of your reactive data object
   
   interface Question {
     question: string;
@@ -29,14 +41,11 @@
     name: 'Quiz',
     data() {
       return {
-        quizTitle: 'Datorsistēmas',
+        quizTitle: '',
         quizQuestions: [
           {
             question: 'Ko dara nslookup funkcija?',
-            options: ['Pārbauda, vai tīkla savienojums starp diviem datoriem ir iespējams', 
-            'Kas palīdz meklēt informāciju par datu bāzes objektiem', 
-            'Ļauj noteikt, vai dators ir savienots ar internetu un noskaidrot tā IP adresi', 
-            'Ļauj automātiski atlasīt un konfigurēt tīkla savienojumus starp vairākiem datoriem un tīkla elementiem'],
+            options: [],
             correctAnswer: 'Ļauj noteikt, vai dators ir savienots ar internetu un noskaidrot tā IP adresi',
             selectedOption: '',
           },
@@ -77,6 +86,20 @@
       },
     },
     methods: {
+    fetchAllData() {
+    axios.get<QuizData[]>('http://localhost:5000/quiz').then(response => {
+      data.value = response.data;
+      const quizData = data.value[0];
+      this.quizTitle = quizData.title;
+
+      const questionData = quizData.questions.split("|");
+      this.quizQuestions[0].options = questionData
+      
+      console.log(this.$options)
+      console.log(data.value[0])
+      console.log(data.value[0].questions.split("|"))
+      });
+  },
       submitQuiz(): void {
         this.quizCompleted = true;
       },
