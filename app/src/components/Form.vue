@@ -4,6 +4,8 @@ const props = defineProps({
   inputId: String,
   inputFor: String,
 })
+
+const isChecked = false
 </script>
 
 <template>
@@ -13,6 +15,7 @@ const props = defineProps({
       type="radio"
       name="flexRadioDefault"
       id="inputId"
+      v-model="isChecked"
       required
     />
     <label class="form-check-label" for="flexRadioDefault1">
