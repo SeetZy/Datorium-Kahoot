@@ -1,46 +1,46 @@
 <template>
     <div class="mt-4 mb-4 p-6 border-2 rounded bg-white">
      <h2 class="mb-4">OOP</h2>
-     <h3 class="mb-3">Kas ir SWOT analīze?</h3>
+     <h3 class="mb-3">Kas ir Polymorphism?</h3>
  
      <form>
        <Form
-         :answer="`Analīzes metode, kas koncentrējas uz spēcīgo un vājo pušu noteikšanu`"
+         :answer="`Mehānisms, kas ļauj jaunai klasei balstīties uz esošu klasi, mantojot visas tās metodes un atribūtus`"
        />
        <Form
-         :answer="`Analīzes metode, kas pēta uzņēmuma darba vides ietekmi`"
+         :answer="`Programmēšanas princips, ko izmanto, lai paslēptu klases ieviešanas informāciju no lietotājiem`"
        />
-       <Form :answer="`Analīzes metode, kas pēta uzņēmuma finanšu stāvokli`" />
+       <Form :answer="`Vairāku objektu izveides process no vienas klases`" />
        <Form
-         :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
+         :answer="`Princips, kā modificēt metodes uzvedību apakšklasē, nemainot tās ieviešanu esošajā klasē`"
        />
      </form>
-     <h3 class="mb-3">Kas ir SWOT analīze?</h3>
+     <h3 class="mb-3">Kurš no šiem nav OOP princips?</h3>
  
      <form>
        <Form
-         :answer="`Analīzes metode, kas koncentrējas uz spēcīgo un vājo pušu noteikšanu`"
+         :answer="`Polymorphism`"
        />
        <Form
-         :answer="`Analīzes metode, kas pēta uzņēmuma darba vides ietekmi`"
+         :answer="`Inheritance`"
        />
-       <Form :answer="`Analīzes metode, kas pēta uzņēmuma finanšu stāvokli`" />
+       <Form :answer="`Abstraction`" />
        <Form
-         :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
+         :answer="`Iteration`"
        />
      </form>
-     <h3 class="mb-3">Kas ir SWOT analīze?</h3>
+     <h3 class="mb-3">Kas ir Enkapsulācija?</h3>
  
      <form>
        <Form
-         :answer="`Analīzes metode, kas koncentrējas uz spēcīgo un vājo pušu noteikšanu`"
+         :answer="`Princips, kas ierobežo tiešu piekļuvi objekta atribūtiem un metodēm, un tā vietā nodrošina piekļuvi, izmantojot publiskas metodes`"
        />
        <Form
-         :answer="`Analīzes metode, kas pēta uzņēmuma darba vides ietekmi`"
+         :answer="`Princips, kas ļauj jaunai klasei balstīties uz esošu klasi, mantojot visas tās metodes un atribūtus`"
        />
-       <Form :answer="`Analīzes metode, kas pēta uzņēmuma finanšu stāvokli`" />
+       <Form :answer="`Princips, kas ļauj pret dažādu klašu objektiem izturēties tā, it kā tie būtu vienas klases`" />
        <Form
-         :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
+         :answer="`Princips, kas ļauj apakšklasei ignorēt tās vecāku klases metodes`"
        />
      </form>
      

@@ -29,18 +29,18 @@
          :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
        />
      </form>
-     <h3 class="mb-3">Kas ir SWOT analīze?</h3>
+     <h3 class="mb-3">Kas ir REST API?</h3>
  
      <form>
        <Form
-         :answer="`Analīzes metode, kas koncentrējas uz spēcīgo un vājo pušu noteikšanu`"
+         :answer="`API veids, kas datu pārsūtīšanai izmanto tikai POST metodi`"
        />
        <Form
-         :answer="`Analīzes metode, kas pēta uzņēmuma darba vides ietekmi`"
+         :answer="`Ievēro reprezentācijas stāvokļa nodošanas (REST) arhitektūras principus`"
        />
-       <Form :answer="`Analīzes metode, kas pēta uzņēmuma finanšu stāvokli`" />
+       <Form :answer="`API veids, kas neizmanto HTTP protokolu datu pārsūtīšanai`" />
        <Form
-         :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
+         :answer="`API veids, kas paredzēts tikai mobilajām ierīcēm`"
        />
      </form>
      
