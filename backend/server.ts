@@ -41,5 +41,5 @@ app.use(router)
 
 // Starts the application
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`)
+  console.log(`Server running on http://localhost:${port}/quiz`)
 })

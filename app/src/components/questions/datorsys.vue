@@ -9,10 +9,9 @@
             <label>{{ option }}</label>
           </div>
         </div> 
-        <button type="submit" class="btn btn-primary mt-2" @click.prevent="submitQuiz()">Iesniegt</button>
+        <button type="submit" class="btn btn-primary mt-2" @click.prevent="submitQuiz()">Iesniegt atbildes</button>
       </form>
-      <p v-if="quizCompleted">You scored {{ userScore }} out of {{ maxScore }}.</p>
-      <button type="button" class="btn btn-info" @click="fetchAllData()">Fetch data</button>
+      <p v-if="quizCompleted">You scored {{ userScore }} out of {{ maxScore }}.</p> 
     </div>
   </template>
   
@@ -23,8 +22,8 @@
   interface QuizData {
   // Define the shape of your quiz data object
   // For example:
-  title: string;
-  questions: string;
+  question: string;
+  options: string;
   answers: string;
 }
 
@@ -41,30 +40,24 @@ const data = ref<QuizData[]>([]); // Define the type of your reactive data objec
     name: 'Quiz',
     data() {
       return {
-        quizTitle: '',
+        quizTitle: 'Datorsistēmas',
         quizQuestions: [
           {
-            question: 'Ko dara nslookup funkcija?',
+            question: '',
             options: [],
-            correctAnswer: 'Ļauj noteikt, vai dators ir savienots ar internetu un noskaidrot tā IP adresi',
+            correctAnswer: '',
             selectedOption: '',
           },
           {
-            question: 'Kas ir IP adrese?',
-            options: ['Programmatūras veids, ko izmanto datu bāzu pārvaldīšanai', 
-            'Unikāls skaitliskais identifikators, kas piešķirts katrai ierīcei tīklā, kas izmanto internetu', 
-            'Fiziskā adrese, ko tīkla ierīces izmanto, lai sazinātos savā starpā', 
-            'Tīmekļa pārlūkprogrammas veids, ko izmanto, lai piekļūtu internetam'],
-            correctAnswer: 'Unikāls skaitliskais identifikators, kas piešķirts katrai ierīcei tīklā, kas izmanto internetu',
+            question: '',
+            options: [],
+            correctAnswer: '',
             selectedOption: '',
           },
           {
-            question: 'Kas ir HTTPS?',
-            options: ['Drošs protokols, ko izmanto datu pārsūtīšanai starp tīmekļa pārlūkprogrammu un tīmekļa serveri', 
-            'Rīks, ko izmanto datu bāzu pārvaldībai', 
-            'Programmēšanas valoda, ko izmanto web lapu veidošanai', 
-            'API'],
-            correctAnswer: 'Drošs protokols, ko izmanto datu pārsūtīšanai starp tīmekļa pārlūkprogrammu un tīmekļa serveri',
+            question: '',
+            options: [],
+            correctAnswer: '',
             selectedOption: '',
           },
         ] as Question[],
@@ -89,21 +82,27 @@ const data = ref<QuizData[]>([]); // Define the type of your reactive data objec
     fetchAllData() {
     axios.get<QuizData[]>('http://localhost:5000/quiz').then(response => {
       data.value = response.data;
-      const quizData = data.value[0];
-      this.quizTitle = quizData.title;
-
-      const questionData = quizData.questions.split("|");
-      this.quizQuestions[0].options = questionData
-      
-      console.log(this.$options)
-      console.log(data.value[0])
-      console.log(data.value[0].questions.split("|"))
+    
+      for (let i = 0; i < this.quizQuestions.length; i++) {
+        const quizData = data.value[i];
+        console.log(quizData)
+        const questionData = quizData.options.split("|");
+        // Answer options
+        this.quizQuestions[i].options = questionData
+          // Correct answer
+        this.quizQuestions[i].correctAnswer = quizData.answers
+          // The question
+        this.quizQuestions[i].question = quizData.question
+      }
       });
   },
       submitQuiz(): void {
         this.quizCompleted = true;
       },
     },
+    beforeMount() {
+      this.fetchAllData()
+    }
   });
   </script>
   
