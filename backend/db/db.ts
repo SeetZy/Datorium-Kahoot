@@ -16,32 +16,37 @@ export async function initializeDB() {
       database.run(`
             CREATE TABLE IF NOT EXISTS quiz (
               id INTEGER PRIMARY KEY,
-              title VARCHAR(255) NOT NULL,
-              questions VARCHAR(255) NOT NULL,
+              question VARCHAR(255) NOT NULL UNIQUE,
+              options VARCHAR(255) NOT NULL,
               answers VARCHAR(255) NOT NULL
             );
           `)
     })
 
-    // gribam jau pašā sākumā kad izveidojam datubāzes, iesetot pirmos datus, 
-  // tāpēc paprasa datus no autors tabulas lai pārliecinātos vai tabula ir tukša vai nav
-  // dati būs pieejami funkcijas argumentā autors
-  database.get('SELECT * from quiz', (err, quiz) => {
-    // ja autoru nav, tad zinām ka datu vēl datubāzē nav vispār
-    if (!quiz) {
-      // ieliekam iekšā pirmo autoru
-      database.run(`
-        INSERT INTO quiz (title, questions, answers)
-        VALUES('Datorsistēmas', 'Pārbauda, vai tīkla savienojums starp diviem datoriem ir iespējams|Kas palīdz meklēt informāciju par datu bāzes objektiem|Ļauj noteikt, vai dators ir savienots ar internetu un noskaidrot tā IP adresi|
-        Ļauj automātiski atlasīt un konfigurēt tīkla savienojumus starp vairākiem datoriem un tīkla elementiem', 
-        'Ļauj noteikt, vai dators ir savienots ar internetu un noskaidrot tā IP adresi');
-    `);
-    }
-  })
+  // gribam jau pašā sākumā kad izveidojam datubāzes, iesetot pirmos datus, 
+  // database.get('SELECT * from quiz', (err, quiz) => {
+  //     // ieliekam iekšā pirmo autoru
+  //     database.run(`
+  //       INSERT INTO quiz (question, options, answers)
+  //       VALUES('Ko dara nslookup funkcija?', 'Pārbauda, vai tīkla savienojums starp diviem datoriem ir iespējams|Kas palīdz meklēt informāciju par datu bāzes objektiem|Ļauj noteikt, vai dators ir savienots ar internetu un noskaidrot tā IP adresi|
+  //       Ļauj automātiski atlasīt un konfigurēt tīkla savienojumus starp vairākiem datoriem un tīkla elementiem', 
+  //       'Ļauj noteikt, vai dators ir savienots ar internetu un noskaidrot tā IP adresi');
+  //   `);
+  //     database.run(`
+  //     INSERT INTO quiz (question, options, answers)
+  //     VALUES('Kas ir IP adrese?', 'Programmatūras veids, ko izmanto datu bāzu pārvaldīšanai|Unikāls skaitliskais identifikators, kas piešķirts katrai ierīcei tīklā, kas izmanto internetu|
+  //     Fiziskā adrese, ko tīkla ierīces izmanto, lai sazinātos savā starpā|Tīmekļa pārlūkprogrammas veids, ko izmanto, lai piekļūtu internetam', 
+  //     'Unikāls skaitliskais identifikators, kas piešķirts katrai ierīcei tīklā, kas izmanto internetu');
+  // `);
+  //     database.run(`
+  //     INSERT INTO quiz (question, options, answers)
+  //     VALUES('Kas ir HTTPS?', 'Drošs protokols, ko izmanto datu pārsūtīšanai starp tīmekļa pārlūkprogrammu un tīmekļa serveri|Rīks, ko izmanto datu bāzu pārvaldībai|
+  //     Programmēšanas valoda, ko izmanto web lapu veidošanai|API', 'Drošs protokols, ko izmanto datu pārsūtīšanai starp tīmekļa pārlūkprogrammu un tīmekļa serveri');
+  //   `);
+  // })
 
   // database.run(`DELETE FROM quiz`);
-
-    
+ 
 
     console.log('Database connection Successful')
   } catch (error) {
