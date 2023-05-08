@@ -1,112 +1,119 @@
 <template>
-<<<<<<< HEAD
   <div class="mt-4 mb-4 p-6 border-2 rounded bg-white">
-    <h2 class="mb-4">API</h2>
-    <h3 class="mb-3">Kas ir API atslēga ?</h3>
-
+    <h1 class="mb-3">{{ quizTitle }}:</h1>
     <form>
-      <Form
-        :answer="`Unikāls identifikators, ko izmanto, lai autentificētu un piekļūtu API`"
-      />
-      <Form
-        :answer="`Šifrēšanas veids, ko izmanto, lai nodrošinātu ar API pārsūtītos datus`"
-      />
-      <Form :answer="`Rīks, ko izmanto API dokumentācijas ģenerēšanai`" />
-      <Form :answer="`Programmēšanas valoda, ko izmanto, lai izveidotu API `" />
+      <div v-for="(question, index) in quizQuestions" :key="index">
+        <h3 class="mb-3">{{ question.question }}</h3>
+        <div v-for="(option, index) in question.options" :key="index">
+          <input
+            type="radio"
+            :value="option"
+            v-model="question.selectedOption"
+          />
+          <label class="ml-1">{{ option }}</label>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary mt-2"
+        @click.prevent="submitQuiz()"
+      >
+        Iesniegt atbildes
+      </button>
     </form>
-    <h3 class="mb-3">Kāda ir API nozīme programmēšanā?</h3>
-
-    <form>
-      <Form
-        :answer="`Programmatūras funkcija, kas ļauj noteikt lietotāju autorizācijas līmeni un drošības iestatījumus `"
-      />
-      <Form
-        :answer="`Valodu izpratnes līmenis, kas nepieciešams, lai programmētājs varētu strādāt ar konkrētu valodu`"
-      />
-      <Form
-        :answer="`Datubāzes sistēma, kas izmanto API tehnoloģijas, lai nodrošinātu savienojamību starp datu avotu un lietotņu programmētāju. `"
-      />
-      <Form
-        :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
-      />
-    </form>
-    <h3 class="mb-3">Kas ir SWOT analīze?</h3>
-
-    <form>
-      <Form
-        :answer="`Analīzes metode, kas koncentrējas uz spēcīgo un vājo pušu noteikšanu`"
-      />
-      <Form
-        :answer="`Analīzes metode, kas pēta uzņēmuma darba vides ietekmi`"
-      />
-      <Form :answer="`Analīzes metode, kas pēta uzņēmuma finanšu stāvokli`" />
-      <Form
-        :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
-      />
-    </form>
+    <p v-if="quizCompleted">
+      You scored {{ userScore }} out of {{ maxScore }}.
+    </p>
   </div>
 </template>
 
-<script setup lang="ts">
-/**
- * * Component imports
- */
-import Form from '.././Form.vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import axios from 'axios'
+
+interface QuizData {
+  // Define the shape of your quiz data object
+  // For example:
+  question: string
+  options: string
+  answers: string
+}
+
+const data = ref<QuizData[]>([]) // Define the type of your reactive data object
+
+interface Question {
+  question: string
+  options: string[]
+  correctAnswer: string
+  selectedOption: string
+}
+
+export default defineComponent({
+  name: 'Quiz',
+  data() {
+    return {
+      quizTitle: 'API',
+      quizQuestions: [
+        {
+          question: '',
+          options: [],
+          correctAnswer: '',
+          selectedOption: '',
+        },
+        {
+          question: '',
+          options: [],
+          correctAnswer: '',
+          selectedOption: '',
+        },
+        {
+          question: '',
+          options: [],
+          correctAnswer: '',
+          selectedOption: '',
+        },
+      ] as Question[],
+      quizCompleted: false,
+    }
+  },
+  computed: {
+    userScore(): number {
+      let score = 0
+      this.quizQuestions.forEach((question) => {
+        if (question.selectedOption === question.correctAnswer) {
+          score++
+        }
+      })
+      return score
+    },
+    maxScore(): number {
+      return this.quizQuestions.length
+    },
+  },
+  methods: {
+    fetchAllData() {
+      axios.get<QuizData[]>('http://localhost:5000/api').then((response) => {
+        data.value = response.data
+
+        for (let i = 0; i < this.quizQuestions.length; i++) {
+          const quizData = data.value[i]
+          console.log(quizData)
+          const questionData = quizData.options.split('|')
+          // Answer options
+          this.quizQuestions[i].options = questionData
+          // Correct answer
+          this.quizQuestions[i].correctAnswer = quizData.answers
+          // The question
+          this.quizQuestions[i].question = quizData.question
+        }
+      })
+    },
+    submitQuiz(): void {
+      this.quizCompleted = true
+    },
+  },
+  beforeMount() {
+    this.fetchAllData()
+  },
+})
 </script>
-=======
-    <div class="mt-4 mb-4 p-6 border-2 rounded bg-white">
-     <h2 class="mb-4">API</h2>
-     <h3 class="mb-3">Kas ir API atslēga ?</h3>
- 
-     <form>
-       <Form
-         :answer="`Unikāls identifikators, ko izmanto, lai autentificētu un piekļūtu API`"
-       />
-       <Form
-         :answer="`Šifrēšanas veids, ko izmanto, lai nodrošinātu ar API pārsūtītos datus`"
-       />
-       <Form :answer="`Rīks, ko izmanto API dokumentācijas ģenerēšanai`" />
-       <Form
-         :answer="`Programmēšanas valoda, ko izmanto, lai izveidotu API `"
-       />
-     </form>
-     <h3 class="mb-3">Kāda ir API nozīme programmēšanā?</h3>
- 
-     <form>
-       <Form
-         :answer="`Programmatūras funkcija, kas ļauj noteikt lietotāju autorizācijas līmeni un drošības iestatījumus `"
-       />
-       <Form
-         :answer="`Valodu izpratnes līmenis, kas nepieciešams, lai programmētājs varētu strādāt ar konkrētu valodu`"
-       />
-       <Form :answer="`Datubāzes sistēma, kas izmanto API tehnoloģijas, lai nodrošinātu savienojamību starp datu avotu un lietotņu programmētāju. `" />
-       <Form
-         :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
-       />
-     </form>
-     <h3 class="mb-3">Kas ir REST API?</h3>
- 
-     <form>
-       <Form
-         :answer="`API veids, kas datu pārsūtīšanai izmanto tikai POST metodi`"
-       />
-       <Form
-         :answer="`Ievēro reprezentācijas stāvokļa nodošanas (REST) arhitektūras principus`"
-       />
-       <Form :answer="`API veids, kas neizmanto HTTP protokolu datu pārsūtīšanai`" />
-       <Form
-         :answer="`API veids, kas paredzēts tikai mobilajām ierīcēm`"
-       />
-     </form>
-     
-   </div>
- </template>
- 
- <script setup lang="ts">
- /**
-  * * Component imports
-  */
-  import Form from '.././Form.vue'
- </script>
- 
->>>>>>> 380e90a1a8561ebe06667110e8e51a90193a887a

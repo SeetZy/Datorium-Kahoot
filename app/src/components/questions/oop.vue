@@ -1,112 +1,119 @@
 <template>
-<<<<<<< HEAD
   <div class="mt-4 mb-4 p-6 border-2 rounded bg-white">
-    <h2 class="mb-4">OOP</h2>
-    <h3 class="mb-3">Kas ir SWOT analīze?</h3>
-
+    <h1 class="mb-3">{{ quizTitle }}:</h1>
     <form>
-      <Form
-        :answer="`Analīzes metode, kas koncentrējas uz spēcīgo un vājo pušu noteikšanu`"
-      />
-      <Form
-        :answer="`Analīzes metode, kas pēta uzņēmuma darba vides ietekmi`"
-      />
-      <Form :answer="`Analīzes metode, kas pēta uzņēmuma finanšu stāvokli`" />
-      <Form
-        :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
-      />
+      <div v-for="(question, index) in quizQuestions" :key="index">
+        <h3 class="mb-3">{{ question.question }}</h3>
+        <div v-for="(option, index) in question.options" :key="index">
+          <input
+            type="radio"
+            :value="option"
+            v-model="question.selectedOption"
+          />
+          <label class="ml-1">{{ option }}</label>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary mt-2"
+        @click.prevent="submitQuiz()"
+      >
+        Iesniegt atbildes
+      </button>
     </form>
-    <h3 class="mb-3">Kas ir SWOT analīze?</h3>
-
-    <form>
-      <Form
-        :answer="`Analīzes metode, kas koncentrējas uz spēcīgo un vājo pušu noteikšanu`"
-      />
-      <Form
-        :answer="`Analīzes metode, kas pēta uzņēmuma darba vides ietekmi`"
-      />
-      <Form :answer="`Analīzes metode, kas pēta uzņēmuma finanšu stāvokli`" />
-      <Form
-        :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
-      />
-    </form>
-    <h3 class="mb-3">Kas ir SWOT analīze?</h3>
-
-    <form>
-      <Form
-        :answer="`Analīzes metode, kas koncentrējas uz spēcīgo un vājo pušu noteikšanu`"
-      />
-      <Form
-        :answer="`Analīzes metode, kas pēta uzņēmuma darba vides ietekmi`"
-      />
-      <Form :answer="`Analīzes metode, kas pēta uzņēmuma finanšu stāvokli`" />
-      <Form
-        :answer="`Analīzes metode, kas koncentrējas uz uzņēmuma tehnoloģisko attīstību`"
-      />
-    </form>
+    <p v-if="quizCompleted">
+      You scored {{ userScore }} out of {{ maxScore }}.
+    </p>
   </div>
 </template>
 
-<script setup lang="ts">
-/**
- * * Component imports
- */
-import Form from '.././Form.vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import axios from 'axios'
+
+interface QuizData {
+  // Define the shape of your quiz data object
+  // For example:
+  question: string
+  options: string
+  answers: string
+}
+
+const data = ref<QuizData[]>([]) // Define the type of your reactive data object
+
+interface Question {
+  question: string
+  options: string[]
+  correctAnswer: string
+  selectedOption: string
+}
+
+export default defineComponent({
+  name: 'Quiz',
+  data() {
+    return {
+      quizTitle: 'OOP',
+      quizQuestions: [
+        {
+          question: '',
+          options: [],
+          correctAnswer: '',
+          selectedOption: '',
+        },
+        {
+          question: '',
+          options: [],
+          correctAnswer: '',
+          selectedOption: '',
+        },
+        {
+          question: '',
+          options: [],
+          correctAnswer: '',
+          selectedOption: '',
+        },
+      ] as Question[],
+      quizCompleted: false,
+    }
+  },
+  computed: {
+    userScore(): number {
+      let score = 0
+      this.quizQuestions.forEach((question) => {
+        if (question.selectedOption === question.correctAnswer) {
+          score++
+        }
+      })
+      return score
+    },
+    maxScore(): number {
+      return this.quizQuestions.length
+    },
+  },
+  methods: {
+    fetchAllData() {
+      axios.get<QuizData[]>('http://localhost:5000/oop').then((response) => {
+        data.value = response.data
+
+        for (let i = 0; i < this.quizQuestions.length; i++) {
+          const quizData = data.value[i]
+          console.log(quizData)
+          const questionData = quizData.options.split('|')
+          // Answer options
+          this.quizQuestions[i].options = questionData
+          // Correct answer
+          this.quizQuestions[i].correctAnswer = quizData.answers
+          // The question
+          this.quizQuestions[i].question = quizData.question
+        }
+      })
+    },
+    submitQuiz(): void {
+      this.quizCompleted = true
+    },
+  },
+  beforeMount() {
+    this.fetchAllData()
+  },
+})
 </script>
-=======
-    <div class="mt-4 mb-4 p-6 border-2 rounded bg-white">
-     <h2 class="mb-4">OOP</h2>
-     <h3 class="mb-3">Kas ir Polymorphism?</h3>
- 
-     <form>
-       <Form
-         :answer="`Mehānisms, kas ļauj jaunai klasei balstīties uz esošu klasi, mantojot visas tās metodes un atribūtus`"
-       />
-       <Form
-         :answer="`Programmēšanas princips, ko izmanto, lai paslēptu klases ieviešanas informāciju no lietotājiem`"
-       />
-       <Form :answer="`Vairāku objektu izveides process no vienas klases`" />
-       <Form
-         :answer="`Princips, kā modificēt metodes uzvedību apakšklasē, nemainot tās ieviešanu esošajā klasē`"
-       />
-     </form>
-     <h3 class="mb-3">Kurš no šiem nav OOP princips?</h3>
- 
-     <form>
-       <Form
-         :answer="`Polymorphism`"
-       />
-       <Form
-         :answer="`Inheritance`"
-       />
-       <Form :answer="`Abstraction`" />
-       <Form
-         :answer="`Iteration`"
-       />
-     </form>
-     <h3 class="mb-3">Kas ir Enkapsulācija?</h3>
- 
-     <form>
-       <Form
-         :answer="`Princips, kas ierobežo tiešu piekļuvi objekta atribūtiem un metodēm, un tā vietā nodrošina piekļuvi, izmantojot publiskas metodes`"
-       />
-       <Form
-         :answer="`Princips, kas ļauj jaunai klasei balstīties uz esošu klasi, mantojot visas tās metodes un atribūtus`"
-       />
-       <Form :answer="`Princips, kas ļauj pret dažādu klašu objektiem izturēties tā, it kā tie būtu vienas klases`" />
-       <Form
-         :answer="`Princips, kas ļauj apakšklasei ignorēt tās vecāku klases metodes`"
-       />
-     </form>
-     
-   </div>
- </template>
- 
- <script setup lang="ts">
- /**
-  * * Component imports
-  */
-  import Form from '.././Form.vue'
- </script>
- 
->>>>>>> 380e90a1a8561ebe06667110e8e51a90193a887a

@@ -12,6 +12,8 @@ import gsap from 'gsap'
 import Databases from '../components/questions/databases.vue'
 import Datorsystems from '../components/questions/datorsys.vue'
 import ProblemAnalysis from '../components/questions/problemAnalysis.vue'
+import Oop from '../components/questions/oop.vue'
+import Api from '../components/questions/api.vue'
 
 onMounted(() => {
   document.title = 'QUIZ // DATORIUM QUIZ'
@@ -23,7 +25,6 @@ onMounted(() => {
     { y: 0, opacity: 1, duration: 0.8 }
   )
 })
-
 </script>
 
 <template>
@@ -37,6 +38,7 @@ onMounted(() => {
     <Databases />
     <Datorsystems />
     <ProblemAnalysis />
-
+    <Oop />
+    <Api />
   </div>
 </template>
