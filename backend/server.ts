@@ -22,7 +22,7 @@ initializeDB()
 const app = express()
 
 // Defines the port
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5001
 
 app.use(morgan('dev'))
 

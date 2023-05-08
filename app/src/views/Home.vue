@@ -33,7 +33,7 @@ onMounted(() => {
     id="form"
   >
     <div class="flex justify-center bg-white rounded-md p-3 w-[70vw] mt-2">
-      <h1>Datorium Quiz</h1>
+      <h1 class="text-blue-700">Datorium Quiz</h1>
     </div>
     <Databases />
     <Datorsystems />

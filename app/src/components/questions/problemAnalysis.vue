@@ -93,7 +93,7 @@ export default defineComponent({
   methods: {
     fetchAllData() {
       axios
-        .get<QuizData[]>('http://localhost:5000/problemAnalysis')
+        .get<QuizData[]>('http://localhost:5001/problemAnalysis')
         .then((response) => {
           data.value = response.data
 
