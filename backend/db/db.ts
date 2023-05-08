@@ -91,7 +91,7 @@ export async function initializeDB() {
     //   `)
     // })
 
-    // // gribam jau pašā sākumā kad izveidojam datubāzes, iesetot pirmos datus,
+
     // database.get('SELECT * from datorsys', (err, quiz) => {
     //   // ieliekam iekšā pirmo autoru
     //   database.run(`
@@ -114,7 +114,7 @@ export async function initializeDB() {
     // `)
     // })
 
-    // // gribam jau pašā sākumā kad izveidojam datubāzes, iesetot pirmos datus,
+
     // database.get('SELECT * from oop', (err, quiz) => {
     //   // ieliekam iekšā pirmo autoru
     //   database.run(`
@@ -135,7 +135,7 @@ export async function initializeDB() {
     //   `)
     // })
 
-    // // gribam jau pašā sākumā kad izveidojam datubāzes, iesetot pirmos datus,
+
     // database.get('SELECT * from api', (err, quiz) => {
     //   // ieliekam iekšā pirmo autoru
     //   database.run(`
@@ -155,7 +155,7 @@ export async function initializeDB() {
     //   `)
     // })
 
-    // // gribam jau pašā sākumā kad izveidojam datubāzes, iesetot pirmos datus,
+
     // database.get('SELECT * from problemAnalysis', (err, quiz) => {
     //   // ieliekam iekšā pirmo autoru
     //   database.run(`
