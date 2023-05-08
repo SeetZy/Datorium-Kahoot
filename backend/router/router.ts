@@ -15,8 +15,8 @@ export const router = express.Router()
 router.post('/quiz', (req, res) => {
   database.run(
     `
-        INSERT INTO quiz (title, question, answers)
-        VALUES("${req.body.title}", "${req.body.question}", "${req.body.answers}");
+        INSERT INTO quiz (question, options, answers)
+        VALUES("${req.body.question}", "${req.body.options}", "${req.body.answers}");
       `,
     () => {
       res.json('Answer submitted successfully')
