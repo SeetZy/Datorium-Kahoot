@@ -11,6 +11,20 @@ import { database } from '../db/db'
 // Defines a new Router object
 export const router = express.Router()
 
+// * HTTP requests for Users table
+// Route to post the users answers
+router.post('/users', (req, res) => {
+  database.run(
+    `
+        INSERT INTO users (name, date, results)
+        VALUES("${req.body.name}", "${req.body.date}", "${req.body.results}");
+      `,
+    () => {
+      res.json('Answer submitted successfully')
+    }
+  )
+})
+
 // * HTTP requests for Computer Systems table
 // Route to post the datorsys answers
 router.post('/datorsys', (req, res) => {

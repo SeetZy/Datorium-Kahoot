@@ -15,6 +15,16 @@ export async function initializeDB() {
     database.serialize(() => {
       // Creates the database tables if they do not exist
 
+      // Computer users table
+      database.run(`
+            CREATE TABLE IF NOT EXISTS users (
+              id INTEGER PRIMARY KEY,
+              name VARCHAR(255) NOT NULL,
+              date DATE NOT NULL,
+              results INTEGER NOT NULL
+            );
+          `)
+
       // Computer systems table
       database.run(`
             CREATE TABLE IF NOT EXISTS datorsys (

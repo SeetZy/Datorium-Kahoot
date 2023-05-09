@@ -9,11 +9,7 @@ import gsap from 'gsap'
 /**
  * * Component imports
  */
-import Databases from '../components/questions/databases.vue'
-import Datorsystems from '../components/questions/datorsys.vue'
-import ProblemAnalysis from '../components/questions/problemAnalysis.vue'
-import Oop from '../components/questions/oop.vue'
-import Api from '../components/questions/api.vue'
+import Form from '../components/form.vue'
 
 onMounted(() => {
   document.title = 'QUIZ // DATORIUM QUIZ'
@@ -28,17 +24,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="w-full bg-bg-png bg-cover bg-scroll min-h-screen flex items-center justify-center flex-col"
-    id="form"
-  >
-    <div class="flex justify-center bg-white rounded-md p-3 w-[70vw] mt-2">
-      <h1>Datorium Quiz</h1>
+  <div class="w-full bg-bg-png bg-cover">
+    <div
+      class="bg-scroll min-h-screen flex items-center justify-center flex-col"
+      id="form"
+    >
+      <div class="flex justify-center bg-white rounded-md p-3 w-[70vw] mt-2">
+        <h1>Datorium Quiz</h1>
+      </div>
+      <Form />
     </div>
-    <Databases />
-    <Datorsystems />
-    <ProblemAnalysis />
-    <Oop />
-    <Api />
   </div>
 </template>
